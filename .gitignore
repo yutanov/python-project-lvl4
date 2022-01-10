@@ -1,0 +1,6 @@
+venv
+*.pyc
+staticfiles
+project4_venv/*
+db.sqlite3
+
