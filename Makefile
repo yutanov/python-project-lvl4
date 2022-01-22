@@ -11,4 +11,4 @@ package-install:
 test:
 	PYTHONPATH=. pytest
 lint: ## Run linter
-	poetry run flake8 page_loader
+	poetry run flake8 task_manager
