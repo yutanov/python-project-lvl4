@@ -1,0 +1,91 @@
+{% extends 'task_manager/layout.html' %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block title %}{% trans 'Tasks' %}{% endblock %}
+
+{% block content %}
+
+<div class="container" style="color: white">
+      {% include 'messages.html' %}
+      <h1 class="my-4 text-center">{% trans 'Tasks' %}</h1>
+      <a href="{% url 'create_task' %}"><button class="btn btn-info">{% trans 'CreateTask' %}</button></a>
+      <form class="form-inline center" method="get">
+        <div class="form-group">
+          <label for="id_status">{% trans 'Status' %}</label>
+          <div class="ml-2 mr-3 my-2">
+            <select name="status" class="form-control" title="" id="id_status">
+              {% for status in filter.form.status %}
+                {{ status }}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="id_executor">{% trans 'Executor' %}</label>
+          <div class="mr-3 ml-2 my-2">
+            <select name="executor" class="form-control" title="" id="id_executor">
+              {% for ex in filter.form.executor %}
+                {{ ex }}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="id_label">{% trans 'Label' %}</label>
+          <div class="mr-3 ml-2 my-2">
+            <select name="label" class="form-control" title="" id="id_label">
+              <option>----------</option>
+              {% for label in filter.form.label %}
+                {{ label }}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="mr-3 ml-2 my-2">
+            <div class="form-check">
+              <input type="checkbox" name="self_task" class="form-check-input" id="id_self_task" value="{{ filter.form.self_task.value }}">
+              <label class="form-check-label" for="id_self_task">{% trans 'OnlyMyTask' %}</label>
+            </div>
+          </div>
+        </div>
+        <input class="btn btn-info" type="submit" value="Показать">
+      </forms>
+      <table class="table mx-auto my-1 table-bordered table-hover table-dark">
+        <thead>
+	  <tr>
+	    <th>ID</th>
+	    <th>{% trans 'Name' %}</th>
+            <th>{% trans 'Author' %}</th>
+            <th>{% trans 'Status' %}</th>
+            <th>{% trans 'CreationData' %}</th>
+	    <th>{% trans 'Executor' %}</th>
+	    <th></th>
+	  </tr>
+	</thead>
+	<tbody>
+       	  {% for task in filter.qs %}
+	    <tr>
+	      <td>{{ task.id }}</td>
+ 	      <td><a href="{% url 'show_task' task.id %}" style="color: white">{{ task.name }}</td>
+              <td>{{ task.creator }}</td>
+              <td>{{ task.status }}</td>
+              <td>{{ task.created_at }}</td>
+              <td>{{ task.executor }}</td>
+	      <td>
+	        <a href="{% url 'update_task' task.id %}" class="btn btn-info btn-sm">{% trans 'Change' %}</a>
+		<a href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-sm">{% trans 'Delete' %}</a><br>
+              </td>
+	    </tr>
+	  {% endfor %}
+	</tbody>
+      </table>
+</div> 
+{% endblock %}
+
+
+
+
+
+
+

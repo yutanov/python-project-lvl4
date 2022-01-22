@@ -1,0 +1,23 @@
+{% extends 'task_manager/layout.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}{% trans 'ChangeUserTitle' %}{% endblock %}
+
+
+{% block content %}
+<div class="container" style="width: 50%; color: white">
+  <div class="card bg-dark my-5">
+    <div class="card-header">
+      <h3>{% trans 'ChangeUserTitle' %}</h3>
+    </div>
+    <div class="card-body">
+      <form class="form" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary" type="submit">{% trans 'Change' %}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

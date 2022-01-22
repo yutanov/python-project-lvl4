@@ -1,0 +1,36 @@
+{% extends 'task_manager/layout.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Users' %}{% endblock %}
+
+{% block content %}
+      <div class="mx-auto" style="width: 70%">
+        {% include 'messages.html' %}
+        <h1 class="my-4 text-center" style="color: white">{% trans 'Users' %}</h1>
+        <table class="table mx-auto my-5 table-bordered table-hover table-dark">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{% trans 'UserName' %}</th>
+                    <th>{% trans 'FullName' %}</th>
+                    <th>{% trans 'CreationData' %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for us in users %}
+                <tr>
+                    <td>{{ us.id }}</td>
+                    <td>{{ us.username }}</td>
+                    <td>{{ us.get_full_name }}</td>
+                    <td>{{ us.date_joined }}</td>
+                    <td>
+                        <a href="{% url 'update_user' us.id %}"><button class="btn btn-info btn-sm">{% trans 'Change' %}</button></a>
+                        <a href="{% url 'delete_user' us.id %}"><button class="btn btn-danger btn-sm">{% trans 'Delete' %}</button></a><br>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+{% endblock %}

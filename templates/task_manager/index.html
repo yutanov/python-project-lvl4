@@ -1,0 +1,19 @@
+{% extends 'task_manager/layout.html' %}
+{% load i18n %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+     <main role="main" class="inner cover my-5 mx-auto text-center" style="color: white; width: 50%;">
+        {% include 'messages.html' %}
+        <h1 class="cover-heading">{{ hello }}</h1>
+        <p class="lead">{% trans 'Explanation' %}</p>
+        {% if not user.is_authenticated %}
+        <p class="lead">{% trans 'ForUnknownUsers' %}</p>
+        <p class="lead">
+          <a href="{% url 'register' %}" class="btn btn-lg btn-secondary">{% trans 'Registration' %}</a>
+        </p>
+        {% endif %}
+      </main>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'task_manager/layout.html' %}
+{% load i18n %}
+{% block title %}{% block subtitle %}{% endblock %}{% endblock %}
+
+
+{% block content %}
+<div class="container" style="width: 50%; color: white">
+  <div class="card bg-dark my-5">
+    <div class="card-header">
+      <h3>{% block title_in_body %}{% endblock %}</h3>
+    </div>
+    <div class="card-body">
+      <form class="form" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+	      <label for="name">{% trans 'Name' %}</label>
+	      <input type="text" class="form-control" name="name" id="name" placeholder="Имя" value="{{ form.name.value|default_if_none:''}}">
+	</div>
+        <button class="btn btn-primary mt-3" type="submit">{% block buttom_name %}{% endblock %}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

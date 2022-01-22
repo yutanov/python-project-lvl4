@@ -1,0 +1,58 @@
+{% extends 'task_manager/layout.html' %}
+{% load i18n %}
+{% block title %}{% block subtitle %}{% endblock %}{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 50%; color: white">
+  <div class="card bg-dark my-5">
+    <div class="card-header">
+      <h3>{% block title_in_body %}{% endblock %}</h3>
+    </div>
+    <div class="card-body">
+	  <form method="post" class="form">
+	    {% csrf_token %}
+	    {% if form.errors %}
+	    <div class="alert alert-danger" role="alert">
+	      {{ form.errors }}
+	    </div>
+	    {% endif %}
+	    <div class="form-group">
+	      <label for="name">{% trans 'Name' %}</label>
+	      <input type="text" class="form-control" name="name" id="name" placeholder="Имя" value="{{ form.name.value|default_if_none:'' }}">
+	    </div>
+	    <div class="form-group">
+	      <label for="description">{% trans 'Description' %}</label>
+	      <textarea class="form-control" id="description" name="description" placeholder="Описание" rows=3>{{ form.description.value|default_if_none:'' }}</textarea>
+	    </div>
+	    <div class="row">
+	      <div class="form-group col-md-4">
+		<label for="executor">{% trans 'Executor' %}</label>
+		<select class="form-control" id="executor" name="executor">
+		{% for ex in form.executor %}
+		  {{ ex }}
+		{% endfor %}
+		</select>
+	      </div>
+	      <div class="form-group col-md-4">
+		<label for="status">{% trans 'Status' %}</label>
+		<select class="form-control" id="status" name="status">
+		{% for st in form.status %}
+		  {{ st }}
+		{% endfor %}
+		</select>
+	      </div>
+	      <div class="form-group">
+		<label for="label">{% trans 'Labels' %}</label>
+		<select name="label" class="form-control" id="label" title="" multiple>
+		{% for st in form.label %}
+		  {{ st }}
+		{% endfor %}}
+		</select>
+	      </div>
+	    </div>
+	    <button type="submit" class="btn btn-primary">{% block buttom_name %}{% endblock %}</button>
+	  </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'task_manager/layout.html' %}
+{% load i18n %}
+{% block title %}Удаление{% endblock %}
+
+{% block content %}
+<div class="lead mx-auto my-5 text-center" style="color: white">
+    <h1>{% block delete_title %}{% endblock %}</h1>
+    <p>{% block delete_question %}{% endblock %}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger mt-3" type="submit" value="{% trans 'DeleteConfirm' %}">
+    </form>
+</div>
+{% endblock %}
